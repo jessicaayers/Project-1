@@ -357,7 +357,7 @@ size = 2, binwidth = 3) +
     ## This warning is displayed once every 8 hours.
     ## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.
 
-![](/Users/jessayers/Documents/ST%20558/TOPIC%202/Project-1/unnamed-chunk-9-1.png)<!-- -->
+![](unnamed-chunk-9-1.png)
 
 ``` r
 #Boxplot
@@ -365,7 +365,7 @@ g <- ggplot(edaData, aes(x = Type, y = lengthOfTitle))
 g + geom_boxplot(fill = "red")
 ```
 
-![](/Users/jessayers/Documents/ST%20558/TOPIC%202/Project-1/unnamed-chunk-10-1.png)<!-- -->
+![](unnamed-chunk-10-1.png)
 
 ``` r
 g <- ggplot(edaData, aes(x = Year, y = lengthOfTitle))
@@ -379,7 +379,7 @@ lwd = 1.5, aes(group = Type, col = Type))
     ## This warning is displayed once every 8 hours.
     ## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.
 
-![](/Users/jessayers/Documents/ST%20558/TOPIC%202/Project-1/unnamed-chunk-11-1.png)<!-- -->
+![](unnamed-chunk-11-1.png)
 
 ``` r
 #scatterplot
@@ -389,11 +389,11 @@ g + geom_point() +
   geom_text(aes(label = Year))
 ```
 
-![](/Users/jessayers/Documents/ST%20558/TOPIC%202/Project-1/unnamed-chunk-12-1.png)<!-- -->
+![](unnamed-chunk-12-1.png)
 
 ``` r
 g <- ggplot(edaData, aes(x = Sequel, y = lengthOfTitle, color = Year))
 g + geom_line(lwd = 4)
 ```
 
-![](/Users/jessayers/Documents/ST%20558/TOPIC%202/Project-1/unnamed-chunk-13-1.png)<!-- -->
+![](unnamed-chunk-13-1.png)
