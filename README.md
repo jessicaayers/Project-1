@@ -342,7 +342,7 @@ g + geom_bar(aes(fill = Type)) +
   coord_flip()
 ```
 
-![](/Users/jessayers/Documents/ST%20558/TOPIC%202/Project-1/unnamed-chunk-8-1.png)<!-- -->
+![]("/Users/jessayers/Documents/ST 558/TOPIC 2/Project-1/unnamed-chunk-8-1.png")
 
 ``` r
 #histogram
