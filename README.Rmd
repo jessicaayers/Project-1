@@ -26,8 +26,13 @@ library(GGally)
 
 # Functions
 
-Options for s include blue, red and green
-Options for y include 2000, 2010 and 2020
+The API used was the Open Movie Database API. Two different types of data were returned based on parameters used in the link. With the below function, a list of information corresponding to one random movie will returned along with a data frame of 10 random movies with more limited information. The data frame will be used to do the exploratory data analysis. For this API, movies with different colors in the titles will be returned for three different release years. The 6 choices are:
+
+  - Options for `s` include *blue*, *red* and *green*
+    - `s` searches for movie titles with the provided word
+  - Options for `y` include *2000*, *2010* and *2020*
+    - `y` stands for year of release
+    
 There are 9 total combinations of possible modifications. 
 
 ```{r}
@@ -43,7 +48,10 @@ blue <- bluedf %>%
   as_tibble() %>%
   rename(Title = blueParsed.Search.Title, Year = blueParsed.Search.Year, imdbID = blueParsed.Search.imdbID, Type = blueParsed.Search.Type)
 
-return(blue)
+testData <- GET("http://www.omdbapi.com/?t=blue&y=2000&apikey=ca153ce0")
+randomData <- fromJSON(rawToChar(testData$content))
+
+return(list(RandomMovie = randomData, RandomDF = blue))
 }
 
 else if((s == "blue") & (y == 2010)){
@@ -55,7 +63,10 @@ else if((s == "blue") & (y == 2010)){
     as_tibble() %>%
     rename(Title = blueParsed.Search.Title, Year = blueParsed.Search.Year, imdbID = blueParsed.Search.imdbID, Type = blueParsed.Search.Type) 
 
-return(blue)
+testData <- GET("http://www.omdbapi.com/?t=blue&y=2010&apikey=ca153ce0")
+randomData <- fromJSON(rawToChar(testData$content))
+
+return(list(RandomMovie = randomData, RandomDF = blue))
 }
 
 else if((s == "blue") & (y == 2020)){
@@ -67,7 +78,10 @@ blue <- bluedf %>%
   as_tibble() %>%
   rename(Title = blueParsed.Search.Title, Year = blueParsed.Search.Year, imdbID = blueParsed.Search.imdbID, Type = blueParsed.Search.Type)
 
-return(blue)
+testData <- GET("http://www.omdbapi.com/?t=blue&y=2020&apikey=ca153ce0")
+randomData <- fromJSON(rawToChar(testData$content))
+
+return(list(RandomMovie = randomData, RandomDF = blue))
 }
 
 else if ((s == "red") & (y == 2000)){
@@ -79,7 +93,10 @@ red <- reddf %>%
   as_tibble() %>%
   rename(Title = redParsed.Search.Title, Year = redParsed.Search.Year, imdbID = redParsed.Search.imdbID, Type = redParsed.Search.Type)
 
-return(red)
+testData <- GET("http://www.omdbapi.com/?t=red&y=2000&apikey=ca153ce0")
+randomData <- fromJSON(rawToChar(testData$content))
+
+return(list(RandomMovie = randomData, RandomDF = red))
 }
 
 else if ((s == "red") & (y == 2010)){
@@ -91,7 +108,10 @@ red <- reddf %>%
   as_tibble() %>%
   rename(Title = redParsed.Search.Title, Year = redParsed.Search.Year, imdbID = redParsed.Search.imdbID, Type = redParsed.Search.Type) 
 
-return(red)
+testData <- GET("http://www.omdbapi.com/?t=red&y=2010&apikey=ca153ce0")
+randomData <- fromJSON(rawToChar(testData$content))
+
+return(list(RandomMovie = randomData, RandomDF = red))
 }
 
 else if((s == "red") & (y == 2020)){
@@ -103,7 +123,10 @@ red <- reddf %>%
   as_tibble() %>%
   rename(Title = redParsed.Search.Title, Year = redParsed.Search.Year, imdbID = redParsed.Search.imdbID, Type = redParsed.Search.Type) 
 
-return(red)
+testData <- GET("http://www.omdbapi.com/?t=red&y=2020&apikey=ca153ce0")
+randomData <- fromJSON(rawToChar(testData$content))
+
+return(list(RandomMovie = randomData, RandomDF = red))
 }
 
 else if((s == "green") & (y == 2000)){
@@ -115,7 +138,10 @@ green <- greendf %>%
   as_tibble() %>%
   rename(Title = greenParsed.Search.Title, Year = greenParsed.Search.Year, imdbID = greenParsed.Search.imdbID, Type = greenParsed.Search.Type) 
 
-return(green)
+testData <- GET("http://www.omdbapi.com/?t=green&y=2000&apikey=ca153ce0")
+randomData <- fromJSON(rawToChar(testData$content))
+
+return(list(RandomMovie = randomData, RandomDF = green))
 }
 
 else if((s== "green") & (y == 2010)){
@@ -127,7 +153,9 @@ green <- greendf %>%
   as_tibble() %>%
   rename(Title = greenParsed.Search.Title, Year = greenParsed.Search.Year, imdbID = greenParsed.Search.imdbID, Type = greenParsed.Search.Type) 
 
-return(green)
+testData <- GET("http://www.omdbapi.com/?t=green&y=2010&apikey=ca153ce0")
+randomData <- fromJSON(rawToChar(testData$content))
+return(list(RandomMovie = randomData, RandomDF = green))
 }
 
 else if((s == "green") & (y == 2020)){
@@ -139,7 +167,10 @@ green <- greendf %>%
   as_tibble() %>%
   rename(Title = greenParsed.Search.Title, Year = greenParsed.Search.Year, imdbID = greenParsed.Search.imdbID, Type = greenParsed.Search.Type) 
 
-return(green)
+testData <- GET("http://www.omdbapi.com/?t=green&y=2020&apikey=ca153ce0")
+randomData <- fromJSON(rawToChar(testData$content))
+
+return(list(RandomMovie = randomData, RandomDF = green))
 }
 
 else(stop("invalid s or y argument"))
@@ -147,13 +178,27 @@ else(stop("invalid s or y argument"))
 }
 ```
 
+Some examples of random movie titles returned from the above function are:
+```{r}
+contactFunction("blue", 2010)$RandomMovie
+contactFunction("red", 2010)$RandomMovie
+contactFunction("green", 2010)$RandomMovie
+```
 
-# Section 3
+Examples of data frames that are returned from the above function:
+
+```{r}
+contactFunction("blue", 2010)$RandomDF
+contactFunction("red", 2010)$RandomDF
+contactFunction("green", 2010)$RandomDF
+```
+
+# Exploratory Data Analysis
 
 ```{r, message = FALSE}
-redData1 <- contactFunction(s = "red", y = 2000)
-redData2 <- contactFunction(s = "red", y = 2010)
-redData3 <- contactFunction(s = "red", y = 2020)
+redData1 <- contactFunction(s = "red", y = 2000)$RandomDF
+redData2 <- contactFunction(s = "red", y = 2010)$RandomDF
+redData3 <- contactFunction(s = "red", y = 2020)$RandomDF
 half <- full_join(redData1, redData2)
 edaData <- full_join(half, redData3)
 edaData

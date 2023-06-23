@@ -21,8 +21,20 @@ library(GGally)
 
 # Functions
 
-Options for s include blue, red and green Options for y include 2000,
-2010 and 2020 There are 9 total combinations of possible modifications.
+The API used was the Open Movie Database API. Two different types of
+data were returned based on parameters used in the link. With the below
+function, a list of information corresponding to one random movie will
+returned along with a data frame of 10 random movies with more limited
+information. The data frame will be used to do the exploratory data
+analysis. For this API, movies with different colors in the titles will
+be returned for three different release years. The 6 choices are:
+
+- Options for `s` include *blue*, *red* and *green*
+  - `s` searches for movie titles with the provided word
+- Options for `y` include *2000*, *2010* and *2020*
+  - `y` stands for year of release
+
+There are 9 total combinations of possible modifications.
 
 ``` r
 contactFunction <- function(s, y){
@@ -37,7 +49,10 @@ blue <- bluedf %>%
   as_tibble() %>%
   rename(Title = blueParsed.Search.Title, Year = blueParsed.Search.Year, imdbID = blueParsed.Search.imdbID, Type = blueParsed.Search.Type)
 
-return(blue)
+testData <- GET("http://www.omdbapi.com/?t=blue&y=2000&apikey=ca153ce0")
+randomData <- fromJSON(rawToChar(testData$content))
+
+return(list(RandomMovie = randomData, RandomDF = blue))
 }
 
 else if((s == "blue") & (y == 2010)){
@@ -49,7 +64,10 @@ else if((s == "blue") & (y == 2010)){
     as_tibble() %>%
     rename(Title = blueParsed.Search.Title, Year = blueParsed.Search.Year, imdbID = blueParsed.Search.imdbID, Type = blueParsed.Search.Type) 
 
-return(blue)
+testData <- GET("http://www.omdbapi.com/?t=blue&y=2010&apikey=ca153ce0")
+randomData <- fromJSON(rawToChar(testData$content))
+
+return(list(RandomMovie = randomData, RandomDF = blue))
 }
 
 else if((s == "blue") & (y == 2020)){
@@ -61,7 +79,10 @@ blue <- bluedf %>%
   as_tibble() %>%
   rename(Title = blueParsed.Search.Title, Year = blueParsed.Search.Year, imdbID = blueParsed.Search.imdbID, Type = blueParsed.Search.Type)
 
-return(blue)
+testData <- GET("http://www.omdbapi.com/?t=blue&y=2020&apikey=ca153ce0")
+randomData <- fromJSON(rawToChar(testData$content))
+
+return(list(RandomMovie = randomData, RandomDF = blue))
 }
 
 else if ((s == "red") & (y == 2000)){
@@ -73,7 +94,10 @@ red <- reddf %>%
   as_tibble() %>%
   rename(Title = redParsed.Search.Title, Year = redParsed.Search.Year, imdbID = redParsed.Search.imdbID, Type = redParsed.Search.Type)
 
-return(red)
+testData <- GET("http://www.omdbapi.com/?t=red&y=2000&apikey=ca153ce0")
+randomData <- fromJSON(rawToChar(testData$content))
+
+return(list(RandomMovie = randomData, RandomDF = red))
 }
 
 else if ((s == "red") & (y == 2010)){
@@ -85,7 +109,10 @@ red <- reddf %>%
   as_tibble() %>%
   rename(Title = redParsed.Search.Title, Year = redParsed.Search.Year, imdbID = redParsed.Search.imdbID, Type = redParsed.Search.Type) 
 
-return(red)
+testData <- GET("http://www.omdbapi.com/?t=red&y=2010&apikey=ca153ce0")
+randomData <- fromJSON(rawToChar(testData$content))
+
+return(list(RandomMovie = randomData, RandomDF = red))
 }
 
 else if((s == "red") & (y == 2020)){
@@ -97,7 +124,10 @@ red <- reddf %>%
   as_tibble() %>%
   rename(Title = redParsed.Search.Title, Year = redParsed.Search.Year, imdbID = redParsed.Search.imdbID, Type = redParsed.Search.Type) 
 
-return(red)
+testData <- GET("http://www.omdbapi.com/?t=red&y=2020&apikey=ca153ce0")
+randomData <- fromJSON(rawToChar(testData$content))
+
+return(list(RandomMovie = randomData, RandomDF = red))
 }
 
 else if((s == "green") & (y == 2000)){
@@ -109,7 +139,10 @@ green <- greendf %>%
   as_tibble() %>%
   rename(Title = greenParsed.Search.Title, Year = greenParsed.Search.Year, imdbID = greenParsed.Search.imdbID, Type = greenParsed.Search.Type) 
 
-return(green)
+testData <- GET("http://www.omdbapi.com/?t=green&y=2000&apikey=ca153ce0")
+randomData <- fromJSON(rawToChar(testData$content))
+
+return(list(RandomMovie = randomData, RandomDF = green))
 }
 
 else if((s== "green") & (y == 2010)){
@@ -121,7 +154,9 @@ green <- greendf %>%
   as_tibble() %>%
   rename(Title = greenParsed.Search.Title, Year = greenParsed.Search.Year, imdbID = greenParsed.Search.imdbID, Type = greenParsed.Search.Type) 
 
-return(green)
+testData <- GET("http://www.omdbapi.com/?t=green&y=2010&apikey=ca153ce0")
+randomData <- fromJSON(rawToChar(testData$content))
+return(list(RandomMovie = randomData, RandomDF = green))
 }
 
 else if((s == "green") & (y == 2020)){
@@ -133,7 +168,10 @@ green <- greendf %>%
   as_tibble() %>%
   rename(Title = greenParsed.Search.Title, Year = greenParsed.Search.Year, imdbID = greenParsed.Search.imdbID, Type = greenParsed.Search.Type) 
 
-return(green)
+testData <- GET("http://www.omdbapi.com/?t=green&y=2020&apikey=ca153ce0")
+randomData <- fromJSON(rawToChar(testData$content))
+
+return(list(RandomMovie = randomData, RandomDF = green))
 }
 
 else(stop("invalid s or y argument"))
@@ -141,12 +179,315 @@ else(stop("invalid s or y argument"))
 }
 ```
 
-# Section 3
+Some examples of random movie titles returned from the above function
+are:
 
 ``` r
-redData1 <- contactFunction(s = "red", y = 2000)
-redData2 <- contactFunction(s = "red", y = 2010)
-redData3 <- contactFunction(s = "red", y = 2020)
+contactFunction("blue", 2010)$RandomMovie
+```
+
+    ## $Title
+    ## [1] "Blue Valentine"
+    ## 
+    ## $Year
+    ## [1] "2010"
+    ## 
+    ## $Rated
+    ## [1] "R"
+    ## 
+    ## $Released
+    ## [1] "28 Jan 2011"
+    ## 
+    ## $Runtime
+    ## [1] "112 min"
+    ## 
+    ## $Genre
+    ## [1] "Drama, Romance"
+    ## 
+    ## $Director
+    ## [1] "Derek Cianfrance"
+    ## 
+    ## $Writer
+    ## [1] "Derek Cianfrance, Joey Curtis, Cami Delavigne"
+    ## 
+    ## $Actors
+    ## [1] "Ryan Gosling, Michelle Williams, John Doman"
+    ## 
+    ## $Plot
+    ## [1] "The relationship of a contemporary married couple, charting their evolution over a span of years by cross-cutting between time periods."
+    ## 
+    ## $Language
+    ## [1] "English"
+    ## 
+    ## $Country
+    ## [1] "United States"
+    ## 
+    ## $Awards
+    ## [1] "Nominated for 1 Oscar. 9 wins & 56 nominations total"
+    ## 
+    ## $Poster
+    ## [1] "https://m.media-amazon.com/images/M/MV5BMTU4MTQ2MzA1Ml5BMl5BanBnXkFtZTcwODE3NTgwNA@@._V1_SX300.jpg"
+    ## 
+    ## $Ratings
+    ##                    Source  Value
+    ## 1 Internet Movie Database 7.3/10
+    ## 2         Rotten Tomatoes    86%
+    ## 3              Metacritic 81/100
+    ## 
+    ## $Metascore
+    ## [1] "81"
+    ## 
+    ## $imdbRating
+    ## [1] "7.3"
+    ## 
+    ## $imdbVotes
+    ## [1] "203,428"
+    ## 
+    ## $imdbID
+    ## [1] "tt1120985"
+    ## 
+    ## $Type
+    ## [1] "movie"
+    ## 
+    ## $DVD
+    ## [1] "10 May 2011"
+    ## 
+    ## $BoxOffice
+    ## [1] "$9,706,328"
+    ## 
+    ## $Production
+    ## [1] "N/A"
+    ## 
+    ## $Website
+    ## [1] "N/A"
+    ## 
+    ## $Response
+    ## [1] "True"
+
+``` r
+contactFunction("red", 2010)$RandomMovie
+```
+
+    ## $Title
+    ## [1] "RED"
+    ## 
+    ## $Year
+    ## [1] "2010"
+    ## 
+    ## $Rated
+    ## [1] "PG-13"
+    ## 
+    ## $Released
+    ## [1] "15 Oct 2010"
+    ## 
+    ## $Runtime
+    ## [1] "111 min"
+    ## 
+    ## $Genre
+    ## [1] "Action, Comedy, Crime"
+    ## 
+    ## $Director
+    ## [1] "Robert Schwentke"
+    ## 
+    ## $Writer
+    ## [1] "Jon Hoeber, Erich Hoeber, Warren Ellis"
+    ## 
+    ## $Actors
+    ## [1] "Bruce Willis, Helen Mirren, Morgan Freeman"
+    ## 
+    ## $Plot
+    ## [1] "When his peaceful life is threatened by a high-tech assassin, former black-ops agent Frank Moses reassembles his old team in a last-ditch effort to survive and uncover his assailants."
+    ## 
+    ## $Language
+    ## [1] "English, Russian"
+    ## 
+    ## $Country
+    ## [1] "United States, China"
+    ## 
+    ## $Awards
+    ## [1] "4 wins & 19 nominations"
+    ## 
+    ## $Poster
+    ## [1] "https://m.media-amazon.com/images/M/MV5BMzg2Mjg1OTk0NF5BMl5BanBnXkFtZTcwMjQ4MTA3Mw@@._V1_SX300.jpg"
+    ## 
+    ## $Ratings
+    ##                    Source  Value
+    ## 1 Internet Movie Database 7.0/10
+    ## 2         Rotten Tomatoes    72%
+    ## 3              Metacritic 60/100
+    ## 
+    ## $Metascore
+    ## [1] "60"
+    ## 
+    ## $imdbRating
+    ## [1] "7.0"
+    ## 
+    ## $imdbVotes
+    ## [1] "315,498"
+    ## 
+    ## $imdbID
+    ## [1] "tt1245526"
+    ## 
+    ## $Type
+    ## [1] "movie"
+    ## 
+    ## $DVD
+    ## [1] "25 Jan 2011"
+    ## 
+    ## $BoxOffice
+    ## [1] "$90,380,162"
+    ## 
+    ## $Production
+    ## [1] "N/A"
+    ## 
+    ## $Website
+    ## [1] "N/A"
+    ## 
+    ## $Response
+    ## [1] "True"
+
+``` r
+contactFunction("green", 2010)$RandomMovie
+```
+
+    ## $Title
+    ## [1] "Green"
+    ## 
+    ## $Year
+    ## [1] "2010"
+    ## 
+    ## $Rated
+    ## [1] "Not Rated"
+    ## 
+    ## $Released
+    ## [1] "25 Sep 2010"
+    ## 
+    ## $Runtime
+    ## [1] "80 min"
+    ## 
+    ## $Genre
+    ## [1] "Comedy"
+    ## 
+    ## $Director
+    ## [1] "Nick Gregorio"
+    ## 
+    ## $Writer
+    ## [1] "Nick Gregorio, Troy Kaplan"
+    ## 
+    ## $Actors
+    ## [1] "Nick Gregorio, Michelle Nunes, Danny Myers"
+    ## 
+    ## $Plot
+    ## [1] "An aspiring businessman moves to marijuana-friendly California with high hopes of opening a government legal dispensary and seeing the \"green\" roll in. But a moratorium placed on seller's licenses complicate matters."
+    ## 
+    ## $Language
+    ## [1] "English"
+    ## 
+    ## $Country
+    ## [1] "United States"
+    ## 
+    ## $Awards
+    ## [1] "N/A"
+    ## 
+    ## $Poster
+    ## [1] "https://m.media-amazon.com/images/M/MV5BMjI1ODEzMzY5MV5BMl5BanBnXkFtZTcwODg2MTM1Nw@@._V1_SX300.jpg"
+    ## 
+    ## $Ratings
+    ##                    Source  Value
+    ## 1 Internet Movie Database 7.9/10
+    ## 
+    ## $Metascore
+    ## [1] "N/A"
+    ## 
+    ## $imdbRating
+    ## [1] "7.9"
+    ## 
+    ## $imdbVotes
+    ## [1] "36"
+    ## 
+    ## $imdbID
+    ## [1] "tt1844673"
+    ## 
+    ## $Type
+    ## [1] "movie"
+    ## 
+    ## $DVD
+    ## [1] "11 Apr 2013"
+    ## 
+    ## $BoxOffice
+    ## [1] "N/A"
+    ## 
+    ## $Production
+    ## [1] "N/A"
+    ## 
+    ## $Website
+    ## [1] "N/A"
+    ## 
+    ## $Response
+    ## [1] "True"
+
+Examples of data frames that are returned from the above function:
+
+``` r
+contactFunction("blue", 2010)$RandomDF
+```
+
+    ## # A tibble: 10 × 4
+    ##    Title                    Year      imdbID    Type  
+    ##    <chr>                    <chr>     <chr>     <chr> 
+    ##  1 Blue Valentine           2010      tt1120985 movie 
+    ##  2 Blue Mountain State      2010–2011 tt1344204 series
+    ##  3 Blue Bloods              2010–     tt1595859 series
+    ##  4 Rookie Blue              2010–2015 tt1442065 series
+    ##  5 Red White & Blue         2010      tt1465505 movie 
+    ##  6 Behind Blue Skies        2010      tt1510918 movie 
+    ##  7 Lady Blue Shanghai       2010      tt1712185 movie 
+    ##  8 Red vs. Blue: Revelation 2010      tt1789886 movie 
+    ##  9 Beneath the Blue         2010      tt1222698 movie 
+    ## 10 Shocking Blue            2010      tt1307010 movie
+
+``` r
+contactFunction("red", 2010)$RandomDF
+```
+
+    ## # A tibble: 10 × 4
+    ##    Title                                 Year  imdbID    Type 
+    ##    <chr>                                 <chr> <chr>     <chr>
+    ##  1 RED                                   2010  tt1245526 movie
+    ##  2 Batman: Under the Red Hood            2010  tt1569923 movie
+    ##  3 Red Dead Redemption                   2010  tt1479962 game 
+    ##  4 Red Hill                              2010  tt1530983 movie
+    ##  5 Red White & Blue                      2010  tt1465505 movie
+    ##  6 Red Dead Redemption: Undead Nightmare 2010  tt1806999 game 
+    ##  7 Red: Werewolf Hunter                  2010  tt1626201 movie
+    ##  8 Red vs. Blue: Revelation              2010  tt1789886 movie
+    ##  9 Red Eagle                             2010  tt1743711 movie
+    ## 10 Red Nights                            2010  tt1401668 movie
+
+``` r
+contactFunction("green", 2010)$RandomDF
+```
+
+    ## # A tibble: 10 × 4
+    ##    Title                                      Year      imdbID    Type  
+    ##    <chr>                                      <chr>     <chr>     <chr> 
+    ##  1 Green Zone                                 2010      tt0947810 movie 
+    ##  2 Green Arrow                                2010      tt1663633 movie 
+    ##  3 The Green Room with Paul Provenza          2010–2011 tt1546139 series
+    ##  4 The Green Wave                             2010      tt1667130 movie 
+    ##  5 Anne of Green Gables: Road to Green Gables 2010      tt2555422 movie 
+    ##  6 The Green Lantern                          2010      tt2283864 movie 
+    ##  7 Inside 'The Green Zone'                    2010      tt1706606 movie 
+    ##  8 Green Days                                 2010      tt2041470 movie 
+    ##  9 Green Crayons                              2010      tt1699129 movie 
+    ## 10 Green                                      2010      tt1844673 movie
+
+# Exploratory Data Analysis
+
+``` r
+redData1 <- contactFunction(s = "red", y = 2000)$RandomDF
+redData2 <- contactFunction(s = "red", y = 2010)$RandomDF
+redData3 <- contactFunction(s = "red", y = 2020)$RandomDF
 half <- full_join(redData1, redData2)
 edaData <- full_join(half, redData3)
 edaData
@@ -348,7 +689,7 @@ g + geom_bar(aes(fill = Type)) +
   coord_flip()
 ```
 
-![](/Users/jessayers/Documents/ST%20558/TOPIC%202/Project-1/unnamed-chunk-8-1.png)<!-- -->
+![](/Users/jessayers/Documents/ST%20558/TOPIC%202/Project-1/unnamed-chunk-10-1.png)<!-- -->
 
 ``` r
 #histogram
@@ -358,7 +699,7 @@ size = 2, binwidth = 3) +
   labs(title = "Histogram of Length of Title", x = "Length of Title", y = "Count")
 ```
 
-![](/Users/jessayers/Documents/ST%20558/TOPIC%202/Project-1/unnamed-chunk-9-1.png)<!-- -->
+![](/Users/jessayers/Documents/ST%20558/TOPIC%202/Project-1/unnamed-chunk-11-1.png)<!-- -->
 
 ``` r
 #Boxplot
@@ -366,7 +707,7 @@ g <- ggplot(edaData, aes(x = Type, y = lengthOfTitle))
 g + geom_boxplot(fill = "red")
 ```
 
-![](/Users/jessayers/Documents/ST%20558/TOPIC%202/Project-1/unnamed-chunk-10-1.png)<!-- -->
+![](/Users/jessayers/Documents/ST%20558/TOPIC%202/Project-1/unnamed-chunk-12-1.png)<!-- -->
 
 ``` r
 g <- ggplot(edaData, aes(x = Year, y = lengthOfTitle))
@@ -375,7 +716,7 @@ stat_summary(fun.y = median, geom = "line",
 lwd = 1.5, aes(group = Type, col = Type))
 ```
 
-![](/Users/jessayers/Documents/ST%20558/TOPIC%202/Project-1/unnamed-chunk-11-1.png)<!-- -->
+![](/Users/jessayers/Documents/ST%20558/TOPIC%202/Project-1/unnamed-chunk-13-1.png)<!-- -->
 
 ``` r
 #scatterplot
@@ -385,11 +726,11 @@ g + geom_point() +
   geom_text(aes(label = Year))
 ```
 
-![](/Users/jessayers/Documents/ST%20558/TOPIC%202/Project-1/unnamed-chunk-12-1.png)<!-- -->
+![](/Users/jessayers/Documents/ST%20558/TOPIC%202/Project-1/unnamed-chunk-14-1.png)<!-- -->
 
 ``` r
 g <- ggplot(edaData, aes(x = Sequel, y = lengthOfTitle, color = Year))
 g + geom_line(lwd = 4)
 ```
 
-![](/Users/jessayers/Documents/ST%20558/TOPIC%202/Project-1/unnamed-chunk-13-1.png)<!-- -->
+![](/Users/jessayers/Documents/ST%20558/TOPIC%202/Project-1/unnamed-chunk-15-1.png)<!-- -->
