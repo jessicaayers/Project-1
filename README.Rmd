@@ -10,9 +10,15 @@ knitr::opts_chunk$set(fig.path = "/Users/jessayers/Documents/ST 558/TOPIC 2/Proj
 
 # Packages Needed
 
+The packages needed for analysis of the Open Movie Database API are:
+
+  - `httr`
+  - `tidyverse`
+  - `jsonlite`
+  - `GGally`
+
 ```{r, message = FALSE}
 library(httr)
-library(dplyr)
 library(jsonlite)
 library(tidyverse)
 library(GGally)

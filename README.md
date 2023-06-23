@@ -5,9 +5,15 @@ Jessica Ayers
 
 # Packages Needed
 
+The packages needed for analysis of the Open Movie Database API are:
+
+- `httr`
+- `tidyverse`
+- `jsonlite`
+- `GGally`
+
 ``` r
 library(httr)
-library(dplyr)
 library(jsonlite)
 library(tidyverse)
 library(GGally)
