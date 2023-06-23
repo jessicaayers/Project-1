@@ -735,7 +735,7 @@ size = 2, binwidth = 3) +
   labs(title = "Histogram of Length of Title", x = "Length of Title", y = "Count")
 ```
 
-![](/Users/jessayers/Documents/ST%20558/TOPIC%202/Project-1/unnamed-chunk-36-1.png)<!-- -->
+![](unnamed-chunk-36-1.png)
 
 The above histogram shows that less programs had longer title lengths.
 Most title lengths were between 5 and 20 letters long.
@@ -749,7 +749,7 @@ g + geom_boxplot(fill = "red") +
   labs(y = "Length of Title", title = "Boxplot for Length of Title at Each Type Level")
 ```
 
-![](/Users/jessayers/Documents/ST%20558/TOPIC%202/Project-1/unnamed-chunk-37-1.png)<!-- -->
+![](unnamed-chunk-37-1.png)
 
 The average length of title for games was larger than movies and series.
 The average length of title appears to be equivalent for movies and
@@ -766,7 +766,7 @@ lwd = 1.5, aes(group = Type, col = Type)) +
   labs(y = "Length of Tile", title = "Boxplots for Year with Median Lines")
 ```
 
-![](/Users/jessayers/Documents/ST%20558/TOPIC%202/Project-1/unnamed-chunk-38-1.png)<!-- -->
+![](unnamed-chunk-38-1.png)
 
 The median length of title increases for movies from 2000 to 2020. The
 median length of title decreases slightly for games from 2000 to 2010.
@@ -784,7 +784,7 @@ g + geom_point() +
   labs(y = "imdbID", x = "Length of Title", title = "Scatterplot of Length of Title for Each IMDBID")
 ```
 
-![](/Users/jessayers/Documents/ST%20558/TOPIC%202/Project-1/unnamed-chunk-39-1.png)<!-- -->
+![](unnamed-chunk-39-1.png)
 
 The majority of imdbID’s corresponded to movie titles. Most movie titles
 had title lengths with less than 20 characters. Each imdbID is labeled
@@ -799,7 +799,7 @@ g + geom_line(lwd = 4) +
   labs(y = "Length of Title", title = "Length of Title for Sequels vs Non-Sequels")
 ```
 
-![](/Users/jessayers/Documents/ST%20558/TOPIC%202/Project-1/unnamed-chunk-40-1.png)<!-- -->
+![](unnamed-chunk-40-1.png)
 
 From the above plot, sequels were found in only 2000 with an average
 title length. These lengths are comparable to non-sequels from 2020.
