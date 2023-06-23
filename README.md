@@ -1,4 +1,4 @@
-Vignette
+Vignette Project
 ================
 Jessica Ayers
 2023-06-22
@@ -342,7 +342,7 @@ g + geom_bar(aes(fill = Type)) +
   coord_flip()
 ```
 
-![](unnamed-chunk-8-1.png)
+![](/Users/jessayers/Documents/ST%20558/TOPIC%202/Project-1/unnamed-chunk-8-1.png)<!-- -->
 
 ``` r
 #histogram
@@ -352,12 +352,7 @@ size = 2, binwidth = 3) +
   labs(title = "Histogram of Length of Title", x = "Length of Title", y = "Count")
 ```
 
-    ## Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
-    ## ℹ Please use `linewidth` instead.
-    ## This warning is displayed once every 8 hours.
-    ## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.
-
-![](unnamed-chunk-9-1.png)
+![](/Users/jessayers/Documents/ST%20558/TOPIC%202/Project-1/unnamed-chunk-9-1.png)<!-- -->
 
 ``` r
 #Boxplot
@@ -365,7 +360,7 @@ g <- ggplot(edaData, aes(x = Type, y = lengthOfTitle))
 g + geom_boxplot(fill = "red")
 ```
 
-![](unnamed-chunk-10-1.png)
+![](/Users/jessayers/Documents/ST%20558/TOPIC%202/Project-1/unnamed-chunk-10-1.png)<!-- -->
 
 ``` r
 g <- ggplot(edaData, aes(x = Year, y = lengthOfTitle))
@@ -374,12 +369,7 @@ stat_summary(fun.y = median, geom = "line",
 lwd = 1.5, aes(group = Type, col = Type))
 ```
 
-    ## Warning: The `fun.y` argument of `stat_summary()` is deprecated as of ggplot2 3.3.0.
-    ## ℹ Please use the `fun` argument instead.
-    ## This warning is displayed once every 8 hours.
-    ## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.
-
-![](unnamed-chunk-11-1.png)
+![](/Users/jessayers/Documents/ST%20558/TOPIC%202/Project-1/unnamed-chunk-11-1.png)<!-- -->
 
 ``` r
 #scatterplot
@@ -389,11 +379,11 @@ g + geom_point() +
   geom_text(aes(label = Year))
 ```
 
-![](unnamed-chunk-12-1.png)
+![](/Users/jessayers/Documents/ST%20558/TOPIC%202/Project-1/unnamed-chunk-12-1.png)<!-- -->
 
 ``` r
 g <- ggplot(edaData, aes(x = Sequel, y = lengthOfTitle, color = Year))
 g + geom_line(lwd = 4)
 ```
 
-![](unnamed-chunk-13-1.png)
+![](/Users/jessayers/Documents/ST%20558/TOPIC%202/Project-1/unnamed-chunk-13-1.png)<!-- -->
