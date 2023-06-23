@@ -484,6 +484,10 @@ contactFunction("green", 2010)$RandomDF
 
 # Exploratory Data Analysis
 
+An exploratory data analysis was done using three endpoints. Three data
+frames are returned for movie titles containing the word “red” for years
+2000, 2010, and 2020. A combined data frame was created and printed.
+
 ``` r
 redData1 <- contactFunction(s = "red", y = 2000)$RandomDF
 redData2 <- contactFunction(s = "red", y = 2010)$RandomDF
@@ -508,11 +512,17 @@ edaData
     ## 10 Red Hot Chili Peppers: Otherside       2000      tt6720738 movie 
     ## # ℹ 20 more rows
 
+A new character variable was created to determine if a movie was a
+sequel or not. In addition, since all character data was returned from
+the API, a numeric variable was created from the length of each program
+title. An updated tibble was printed.
+
 ``` r
 #Create new variable
 #initialize Sequel Variable
 edaData$Sequel <- ""
 for(i in 1:30){
+  #greply used to determine if string contains a 2
   if(grepl("2", edaData$Title[i]) == "TRUE"){
     edaData$Sequel[i] = "Yes"
   }
@@ -520,28 +530,11 @@ for(i in 1:30){
     edaData$Sequel[i] = "No"
   }
 }
-edaData
-```
 
-    ## # A tibble: 30 × 5
-    ##    Title                                  Year      imdbID    Type   Sequel
-    ##    <chr>                                  <chr>     <chr>     <chr>  <chr> 
-    ##  1 Red Planet                             2000      tt0199753 movie  No    
-    ##  2 Clifford the Big Red Dog               2000–2003 tt0233041 series No    
-    ##  3 Command & Conquer: Red Alert 2         2000      tt0252338 game   Yes   
-    ##  4 Agent Red                              2000      tt0218080 movie  No    
-    ##  5 Red Dirt                               2000      tt0160749 movie  No    
-    ##  6 Red Hot Chili Peppers: Californication 2000      tt6720730 movie  No    
-    ##  7 Red Letters                            2000      tt0217758 movie  No    
-    ##  8 Red Room 2                             2000      tt0371945 movie  Yes   
-    ##  9 Rocket's Red Glare                     2000      tt0219279 movie  No    
-    ## 10 Red Hot Chili Peppers: Otherside       2000      tt6720738 movie  No    
-    ## # ℹ 20 more rows
-
-``` r
 #initialize length of title variable
 edaData$lengthOfTitle <- 0
 for(i in 1:30){
+  #nchar used to determine length of string
   edaData$lengthOfTitle[i] <- nchar(edaData$Title[i])
 }
 edaData
@@ -562,6 +555,8 @@ edaData
     ## 10 Red Hot Chili Peppers: Otherside       2000      tt6720… movie No                32
     ## # ℹ 20 more rows
 
+A one-way contingency table was created for each qualitative variable.
+
 ``` r
 #contingency tables
 table(edaData$Year)
@@ -580,6 +575,19 @@ table(edaData$Type)
     ##      3     24      3
 
 ``` r
+table(edaData$Sequel)
+```
+
+    ## 
+    ##  No Yes 
+    ##  28   2
+
+From this data, two movies were sequels. There were 3 games, 24 movies,
+and 3 series.
+
+A two-way contingency table was created for Type and Year.
+
+``` r
 table(edaData$Type, edaData$Year)
 ```
 
@@ -588,6 +596,10 @@ table(edaData$Type, edaData$Year)
     ##   game      1         0    2    0         0         0
     ##   movie     8         0    8    8         0         0
     ##   series    0         1    0    0         1         1
+
+There was 1 game released in 2000, 2 in 2010, and 0 in 2020.
+
+A three-way table was created for Type, Year, and Sequel.
 
 ``` r
 table(edaData$Type, edaData$Year, edaData$Sequel)
@@ -608,6 +620,12 @@ table(edaData$Type, edaData$Year, edaData$Sequel)
     ##   game      1         0    0    0         0         0
     ##   movie     1         0    0    0         0         0
     ##   series    0         0    0    0         0         0
+
+For programs that are sequels, there was 1 game and 1 movie, both
+released in 2000.
+
+Next, numerical summaries were created for the lengthOfTitle
+quantitative variable.
 
 ``` r
 #numerical summaries for quantitative variables at each setting of the categorical variables
@@ -639,6 +657,12 @@ IQR(edaData$lengthOfTitle)
 ```
 
     ## [1] 14
+
+The mean length of title from this data was 17.3333333. The median
+length of title was 14.5. More summary statistics are given above.
+
+The mean, median, and variance of length of title were then found for
+each grouping of Year, Type, and Sequel.
 
 ``` r
 #each setting of year first
@@ -681,6 +705,12 @@ summarise(avg = mean(lengthOfTitle), med = median(lengthOfTitle), var = var(leng
     ## 1 No      17.1  14.5  88.2
     ## 2 Yes     20    20   200
 
+NA’s were created as a result of only one program being released during
+a series of years.
+
+A bar plot was created to show the count of programs per year/year
+interval at each type level.
+
 ``` r
 #bar plot
 g <- ggplot(data = edaData, aes(x = Year))
@@ -689,7 +719,13 @@ g + geom_bar(aes(fill = Type)) +
   coord_flip()
 ```
 
-![](/Users/jessayers/Documents/ST%20558/TOPIC%202/Project-1/unnamed-chunk-10-1.png)<!-- -->
+![](/Users/jessayers/Documents/ST%20558/TOPIC%202/Project-1/unnamed-chunk-35-1.png)<!-- -->
+
+From the above plot, no games were released during 2020. The most games
+were released in 2010. In addition, no tv series were released in 2010.
+All three years had the same average number of releases for movies.
+
+Next a histogram was created.
 
 ``` r
 #histogram
@@ -699,38 +735,72 @@ size = 2, binwidth = 3) +
   labs(title = "Histogram of Length of Title", x = "Length of Title", y = "Count")
 ```
 
-![](/Users/jessayers/Documents/ST%20558/TOPIC%202/Project-1/unnamed-chunk-11-1.png)<!-- -->
+![](/Users/jessayers/Documents/ST%20558/TOPIC%202/Project-1/unnamed-chunk-36-1.png)<!-- -->
+
+The above histogram shows that less programs had longer title lengths.
+Most title lengths were between 5 and 20 letters long.
+
+A boxplot for each type was created.
 
 ``` r
 #Boxplot
 g <- ggplot(edaData, aes(x = Type, y = lengthOfTitle))
-g + geom_boxplot(fill = "red")
+g + geom_boxplot(fill = "red") + 
+  labs(y = "Length of Title", title = "Boxplot for Length of Title at Each Type Level")
 ```
 
-![](/Users/jessayers/Documents/ST%20558/TOPIC%202/Project-1/unnamed-chunk-12-1.png)<!-- -->
+![](/Users/jessayers/Documents/ST%20558/TOPIC%202/Project-1/unnamed-chunk-37-1.png)<!-- -->
+
+The average length of title for games was larger than movies and series.
+The average length of title appears to be equivalent for movies and
+series, with movies have a noticeable outlying value.
+
+More boxplots were created for each year with the median trend line
+shown for each type.
 
 ``` r
 g <- ggplot(edaData, aes(x = Year, y = lengthOfTitle))
 g + geom_boxplot(fill = "red") + 
 stat_summary(fun.y = median, geom = "line",
-lwd = 1.5, aes(group = Type, col = Type))
+lwd = 1.5, aes(group = Type, col = Type)) + 
+  labs(y = "Length of Tile", title = "Boxplots for Year with Median Lines")
 ```
 
-![](/Users/jessayers/Documents/ST%20558/TOPIC%202/Project-1/unnamed-chunk-13-1.png)<!-- -->
+![](/Users/jessayers/Documents/ST%20558/TOPIC%202/Project-1/unnamed-chunk-38-1.png)<!-- -->
+
+The median length of title increases for movies from 2000 to 2020. The
+median length of title decreases slightly for games from 2000 to 2010.
+The median length of title for series fluctuates between the interval of
+years.
+
+A scatterplot was created for length of title per each imdbID.
 
 ``` r
 #scatterplot
 g <- ggplot(edaData, aes(x = lengthOfTitle, y = imdbID))
 g + geom_point() +
   facet_grid(~edaData$Type) + 
-  geom_text(aes(label = Year))
+  geom_text(aes(label = Year)) + 
+  labs(y = "imdbID", x = "Length of Title", title = "Scatterplot of Length of Title for Each IMDBID")
 ```
 
-![](/Users/jessayers/Documents/ST%20558/TOPIC%202/Project-1/unnamed-chunk-14-1.png)<!-- -->
+![](/Users/jessayers/Documents/ST%20558/TOPIC%202/Project-1/unnamed-chunk-39-1.png)<!-- -->
+
+The majority of imdbID’s corresponded to movie titles. Most movie titles
+had title lengths with less than 20 characters. Each imdbID is labeled
+with the release year.
+
+Lastly, a line plot was created to show length of title for sequels vs
+non-sequels.
 
 ``` r
 g <- ggplot(edaData, aes(x = Sequel, y = lengthOfTitle, color = Year))
-g + geom_line(lwd = 4)
+g + geom_line(lwd = 4) + 
+  labs(y = "Length of Title", title = "Length of Title for Sequels vs Non-Sequels")
 ```
 
-![](/Users/jessayers/Documents/ST%20558/TOPIC%202/Project-1/unnamed-chunk-15-1.png)<!-- -->
+![](/Users/jessayers/Documents/ST%20558/TOPIC%202/Project-1/unnamed-chunk-40-1.png)<!-- -->
+
+From the above plot, sequels were found in only 2000 with an average
+title length. These lengths are comparable to non-sequels from 2020.
+Non-sequels from 2010 appear to have the more extreme title lengths.
