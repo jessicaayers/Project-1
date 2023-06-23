@@ -719,7 +719,7 @@ g + geom_bar(aes(fill = Type)) +
   coord_flip()
 ```
 
-![](/Users/jessayers/Documents/ST%20558/TOPIC%202/Project-1/unnamed-chunk-35-1.png)<!-- -->
+![](unnamed-chunk-35-1.png)
 
 From the above plot, no games were released during 2020. The most games
 were released in 2010. In addition, no tv series were released in 2010.
