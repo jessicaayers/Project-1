@@ -753,7 +753,7 @@ g + geom_boxplot(fill = "red") +
 
 The average length of title for games was larger than movies and series.
 The average length of title appears to be equivalent for movies and
-series, with movies have a noticeable outlying value.
+series, with movies having a noticeable outlying value.
 
 More boxplots were created for each year with the median trend line
 shown for each type.
